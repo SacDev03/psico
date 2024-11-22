@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Usuario</title>
+  <!-- Estilos y Fuentes -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+  <style>
+    /* Fondo degradado azul para la barra lateral */
+    .bg-degradado-azul {
+      background: linear-gradient(135deg, #4e79a7, #1f3a59);
+      color: white;
+      height: 100vh; /* Asegura que ocupe toda la altura de la ventana */
+      position: fixed; /* Fija la barra lateral */
+      width: 250px; /* Ajusta el ancho de la barra lateral */
+      top: 0;
+      left: 0;
+    }
+
+    /* Ajusta el contenido para que no se quede debajo de la barra lateral */
+    .container-fluid {
+      margin-left: 250px; /* Espacio para la barra lateral */
+    }
+
+    .list-group-item:hover {
+      background-color: #2c6f92;
+      color: white;
+    }
+
+    form .form-control {
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: 0.3s;
+    }
+
+    form .form-control:focus {
+      border-color: #1f3a59;
+      box-shadow: 0 0 5px rgba(31, 58, 89, 0.5);
+    }
+
+    .alert {
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    .alert:hover {
+      transform: scale(1.05);
+    }
+
+    .modal-content {
+      border-radius: 10px;
+    }
+
+    .modal-header {
+      background-color: #1f3a59;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Barra lateral con fondo degradado azul -->
+      <div class="col-md-3 col-lg-2 p-3 bg-degradado-azul">
+        <h3 class="text-center">Mi Panel</h3>
+        <div class="list-group">
+          <a href="#perfil" class="list-group-item list-group-item-action">
+            <i class="fas fa-user"></i> Mi Perfil
+          </a>
+          <a href="#citas" class="list-group-item list-group-item-action">
+            <i class="fas fa-calendar-alt"></i> Gestionar Citas
+          </a>
+        </div>
+      </div>
+
+      <!-- Contenido Principal -->
+      <div class="col-md-9 col-lg-10 p-4">
+        <!-- Perfil -->
+        <div id="perfil">
+          <h2>Mi Perfil</h2>
+          <form>
+            <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre Completo</label>
+              <input type="text" class="form-control" id="nombre" placeholder="Juan Pérez">
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Correo Electrónico</label>
+              <input type="email" class="form-control" id="email" placeholder="juanperez@gmail.com">
+            </div>
+            <button type="submit" class="btn btn-primary">Actualizar Perfil</button>
+          </form>
+        </div>
+
+        <!-- Citas -->
+        <div id="citas" class="mt-5">
+          <h2>Gestionar Citas</h2>
+          <div class="d-flex justify-content-between mb-3">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCitaModal">
+              <i class="fas fa-plus"></i> Agregar Cita
+            </button>
+            <input type="text" class="form-control w-25" placeholder="Buscar Cita...">
+          </div>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Ejemplo de cita -->
+              <tr>
+                <td>2024-11-22 10:00 AM</td>
+                <td><span class="badge bg-success">Confirmada</span></td>
+                <td>
+                  <button class="btn btn-warning btn-sm"><i class="fas fa-times"></i> Cancelar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Modal para Agregar Cita -->
+        <div class="modal fade" id="addCitaModal" tabindex="-1" aria-labelledby="addCitaModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="addCitaModalLabel">Agregar Nueva Cita</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="mb-3">
+                    <label for="paciente" class="form-label">Paciente</label>
+                    <input type="text" class="form-control" id="paciente" placeholder="Nombre del Paciente">
+                  </div>
+                  <div class="mb-3">
+                    <label for="fecha" class="form-label">Fecha y Hora</label>
+                    <input type="datetime-local" class="form-control" id="fecha">
+                  </div>
+                  <div class="mb-3">
+                    <label for="servicio" class="form-label">Selecciona el Servicio</label>
+                    <select class="form-control" id="servicio" required>
+                      <option value="">Seleccione un servicio</option>
+                      <option value="aplicacion-pruebas">Aplicación de pruebas y test psicológicos</option>
+                      <option value="valoracion-personalidad">Valoración de la personalidad y conducta</option>
+                      <option value="psicoterapia">Psicoterapia para depresión, ansiedad y otros trastornos</option>
+                      <option value="consejeria">Consejería personal</option>
+                      <option value="desarrollo-habilidades">Desarrollo de habilidades sociales</option>
+                      <option value="mediacion-familiar">Mediación familiar</option>
+                      <option value="terapia-pareja">Terapia de pareja</option>
+                      <option value="talleres-psicoeducativos">Talleres psicoeducativos</option>
+                      <option value="salud-mental">Promoción de la salud mental</option>
+                      <option value="evaluacion-aprendizaje">Evaluación de dificultades de aprendizaje</option>
+                    </select>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Guardar Cita</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

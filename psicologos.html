@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Psicólogos</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
+  <style>
+    .bg-degradado-azul {
+      background: linear-gradient(135deg, #4e79a7, #1f3a59);
+      color: white;
+    }
+    .list-group-item:hover {
+      background-color: #2c6f92;
+      color: white;
+    }
+    form .form-control {
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: 0.3s;
+    }
+    form .form-control:focus {
+      border-color: #1f3a59;
+      box-shadow: 0 0 5px rgba(31, 58, 89, 0.5);
+    }
+    .alert {
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+    .alert:hover {
+      transform: scale(1.05);
+    }
+    .modal-content {
+      border-radius: 10px;
+    }
+    .modal-header {
+      background-color: #1f3a59;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3 col-lg-2 p-3 bg-degradado-azul">
+        <h3 class="text-center">Panel Psicólogos</h3>
+        <div class="list-group">
+          <a href="#perfil" class="list-group-item list-group-item-action">
+            <i class="fas fa-user"></i> Mi Perfil
+          </a>
+          <a href="#citas" class="list-group-item list-group-item-action">
+            <i class="fas fa-calendar-alt"></i> Gestionar Citas
+          </a>
+          <a href="#historial" class="list-group-item list-group-item-action">
+            <i class="fas fa-history"></i> Historial de Pacientes
+          </a>
+          <a href="#recordatorios" class="list-group-item list-group-item-action">
+            <i class="fas fa-bell"></i> Recordatorios
+          </a>
+          <a href="#notificaciones" class="list-group-item list-group-item-action">
+            <i class="fas fa-envelope"></i> Notificaciones
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-9 col-lg-10 p-4">
+        <div id="perfil">
+          <h2>Mi Perfil</h2>
+          <form>
+            <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre Completo</label>
+              <input type="text" class="form-control" id="nombre" placeholder="Juan Pérez">
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Correo Electrónico</label>
+              <input type="email" class="form-control" id="email" placeholder="juanperez@gmail.com">
+            </div>
+            <button type="submit" class="btn btn-primary">Actualizar Perfil</button>
+          </form>
+        </div>
+
+        <!-- Citas -->
+        <div id="citas" class="mt-5">
+          <h2>Gestionar Citas</h2>
+          <div class="d-flex justify-content-between mb-3">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCitaModal">
+              <i class="fas fa-plus"></i> Agregar Cita
+            </button>
+            <input type="text" class="form-control w-25" placeholder="Buscar Paciente...">
+          </div>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Paciente</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>2024-11-22 10:00 AM</td>
+                <td>María García</td>
+                <td><span class="badge bg-success">Confirmada</span></td>
+                <td>
+                  <button class="btn btn-warning btn-sm"><i class="fas fa-times"></i> Cancelar</button>
+                  <button class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Editar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Modal para Agregar Cita -->
+        <div class="modal fade" id="addCitaModal" tabindex="-1" aria-labelledby="addCitaModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="addCitaModalLabel">Agregar Nueva Cita</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="mb-3">
+                    <label for="paciente" class="form-label">Paciente</label>
+                    <input type="text" class="form-control" id="paciente" placeholder="Nombre del Paciente">
+                  </div>
+                  <div class="mb-3">
+                    <label for="fecha" class="form-label">Fecha y Hora</label>
+                    <input type="datetime-local" class="form-control" id="fecha">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Guardar Cita</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Historial de Pacientes -->
+        <div id="historial" class="mt-5">
+          <h2>Historial de Pacientes</h2>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <strong>María García</strong> - Última sesión: 2024-11-20 - Notas: Ansiedad durante la sesión.
+            </li>
+          </ul>
+        </div>
+
+        <!-- Recordatorios -->
+        <div id="recordatorios" class="mt-5">
+          <h2>Recordatorios de Citas</h2>
+          <div class="alert alert-info">
+            <strong>2024-11-22 10:00 AM</strong> - Cita con María García.
+          </div>
+        </div>
+
+        <!-- Notificaciones -->
+        <div id="notificaciones" class="mt-5">
+          <h2>Notificaciones</h2>
+          <div class="alert alert-warning">
+            Nueva cita agendada con <strong>Pedro Sánchez</strong> para el 2024-11-25 3:00 PM.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
